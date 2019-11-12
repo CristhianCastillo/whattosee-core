@@ -1,69 +1,90 @@
 package ml.whattosee.dto;
 
+import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DiscussionDto {
 
-    private Long id;
-    private String name;
-    private Date creation;
-    private UserDto userEntity;
-    private MovieDto movieEntity;
+	private Long id;
+	private String name;
+	private Date creation;
+	private UserDto userEntity;
+	private MovieDto movieEntity;
+	private List<CommentDiscussionDto> commentDiscussionEntityList;
 
-    public DiscussionDto() {
+	public DiscussionDto() {
 
-    }
+	}
 
-    public DiscussionDto(Long id, String name, Date creation, UserDto userEntity, MovieDto movieEntity) {
-        this.id = id;
-        this.name = name;
-        this.creation = creation;
-        this.userEntity = userEntity;
-        this.movieEntity = movieEntity;
-    }
+	public DiscussionDto(Long id, String name, Date creation, UserDto userEntity, MovieDto movieEntity,
+			List<CommentDiscussionDto> commentDiscussionEntityList) {
+		this.id = id;
+		this.name = name;
+		this.creation = creation;
+		this.userEntity = userEntity;
+		this.movieEntity = movieEntity;
+		this.commentDiscussionEntityList = commentDiscussionEntityList;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public DiscussionDto(Long id, String name, Date creation, UserDto userEntity, MovieDto movieEntity) {
+		this.id = id;
+		this.name = name;
+		this.creation = creation;
+		this.userEntity = userEntity;
+		this.movieEntity = movieEntity;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Date getCreation() {
-        return creation;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setCreation(Date creation) {
-        this.creation = creation;
-    }
+	public Date getCreation() {
+		return creation;
+	}
 
-    public UserDto getUserEntity() {
-        return userEntity;
-    }
+	public void setCreation(Date creation) {
+		this.creation = creation;
+	}
 
-    public void setUserEntity(UserDto userEntity) {
-        this.userEntity = userEntity;
-    }
+	public UserDto getUserEntity() {
+		return userEntity;
+	}
 
-    public MovieDto getMovieEntity() {
-        return movieEntity;
-    }
+	public void setUserEntity(UserDto userEntity) {
+		this.userEntity = userEntity;
+	}
 
-    public void setMovieEntity(MovieDto movieEntity) {
-        this.movieEntity = movieEntity;
-    }
+	public MovieDto getMovieEntity() {
+		return movieEntity;
+	}
+
+	public void setMovieEntity(MovieDto movieEntity) {
+		this.movieEntity = movieEntity;
+	}
+
+	public List<CommentDiscussionDto> getCommentDiscussionEntityList() {
+		return commentDiscussionEntityList;
+	}
+
+	public void setCommentDiscussionEntityList(List<CommentDiscussionDto> commentDiscussionEntityList) {
+		this.commentDiscussionEntityList = commentDiscussionEntityList;
+	}
+
 }

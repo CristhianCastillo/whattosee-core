@@ -18,6 +18,7 @@ public class EndPointsConstant {
     public static final String REST_POST_COMMENTS = "/comments";
 
     // Discussions
-    public static final String REST_POST_DISCUSSIONS = "/discussions";
+    public static final String REST_GET_DISCUSSIONS = "/discussions";
+    public static final String REST_POST_DISCUSSIONS = "/discussions/create";
     public static final String REST_POST_DISCUSSIONS_COMMENT = "/discussions/comment";
 }

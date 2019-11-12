@@ -39,6 +39,13 @@ public class CommentEntity implements Serializable {
         this.userEntity = userEntity;
         this.movieEntity = movieEntity;
     }
+    
+    public CommentEntity(Long id, String description, Date creation, UserEntity userEntity) {
+        this.id = id;
+        this.description = description;
+        this.creation = creation;
+        this.userEntity = userEntity;
+    }
 
     public Long getId() {
         return id;

@@ -40,7 +40,7 @@ public class UserEntity implements Serializable {
         this.password = password;
         this.rolEntity = rolEntity;
     }
-
+   
     public Long getId() {
         return id;
     }

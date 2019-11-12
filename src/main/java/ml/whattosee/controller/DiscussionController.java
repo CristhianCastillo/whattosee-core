@@ -2,7 +2,9 @@ package ml.whattosee.controller;
 
 import ml.whattosee.dto.CommentDiscussionDto;
 import ml.whattosee.dto.DiscussionDto;
+import ml.whattosee.dto.UserDto;
 import ml.whattosee.service.DiscussionService;
+import ml.whattosee.service.UserService;
 import ml.whattosee.util.CodeErrorResponse;
 import ml.whattosee.util.CodeResponse;
 import ml.whattosee.util.EndPointsConstant;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +28,17 @@ public class DiscussionController {
 
     @Autowired
     private DiscussionService discussionService;
+    
+    @ResponseBody
+    @GetMapping(EndPointsConstant.REST_GET_DISCUSSIONS)
+    public ResponseDto getDiscussions() {
+        try {
+            return new ResponseDto(CodeResponse.OK_COMMON.getCode(), discussionService.getAll());
+        } catch (Exception ex) {
+            LOGGER.error("ERROR CREATING DISCUSSION: {} ", ExceptionUtils.getStackTrace(ex));
+            return new ResponseDto(CodeErrorResponse.ERROR_CREATING_DISCUSSION.getCode(), ex.getMessage());
+        }
+    }
 
     @ResponseBody
     @PostMapping(EndPointsConstant.REST_POST_DISCUSSIONS)
@@ -41,6 +55,8 @@ public class DiscussionController {
     @PostMapping(EndPointsConstant.REST_POST_DISCUSSIONS_COMMENT)
     public ResponseDto create(@RequestBody CommentDiscussionDto commentDiscussionDto) {
         try {
+        	DiscussionDto discussionDto = discussionService.getById(commentDiscussionDto.getDiscussionEntity().getId());
+        	commentDiscussionDto.setDiscussionEntity(discussionDto);
             return new ResponseDto(CodeResponse.OK_COMMON.getCode(), discussionService.saveComment(commentDiscussionDto));
         } catch (Exception ex) {
             LOGGER.error("ERROR CREATING COMMENT DISCUSSION: {} ", ExceptionUtils.getStackTrace(ex));
