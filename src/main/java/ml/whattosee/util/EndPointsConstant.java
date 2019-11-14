@@ -11,6 +11,7 @@ public class EndPointsConstant {
     public static final String REST_GET_GENDERES_ID = "/genders/id";
 
     // Movies
+    public static final String REST_GET_MOVIES = "/movies";
     public static final String REST_GET_MOVIES_NAME = "/movies/name";
     public static final String REST_POST_MOVIES_SCORE = "/movies/score";
 

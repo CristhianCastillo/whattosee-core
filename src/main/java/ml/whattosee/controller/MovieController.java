@@ -39,6 +39,17 @@ public class MovieController {
             return new ResponseDto(CodeErrorResponse.ERROR_GET_GENDERS.getCode(), ex.getMessage());
         }
     }
+    
+    @ResponseBody
+    @GetMapping(EndPointsConstant.REST_GET_MOVIES)
+    public ResponseDto getAll() {
+        try {
+            return new ResponseDto(CodeResponse.OK_COMMON.getCode(), movieService.findAll());
+        } catch (Exception ex) {
+            LOGGER.error("ERROR GET MOVIES BY NAME: {} ", ExceptionUtils.getStackTrace(ex));
+            return new ResponseDto(CodeErrorResponse.ERROR_GET_GENDERS.getCode(), ex.getMessage());
+        }
+    }
 
     @ResponseBody
     @PostMapping(EndPointsConstant.REST_POST_MOVIES_SCORE)

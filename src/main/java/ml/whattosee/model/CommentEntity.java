@@ -1,5 +1,8 @@
 package ml.whattosee.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,82 +11,84 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "comment")
 public class CommentEntity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, name = "description")
-    private String description;
-    @Column(nullable = false, name = "creation")
-    private Date creation;
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "user_id")
-    private UserEntity userEntity;
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "movie_id")
-    private MovieEntity movieEntity;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(nullable = false, name = "description")
+	private String description;
+	@Column(nullable = false, name = "creation")
+	private Date creation;
+	@ManyToOne
+	@JoinColumn(nullable = false, name = "user_id")
+	private UserEntity userEntity;
+	@ManyToOne
+	@JoinColumn(nullable = false, name = "movie_id")
+	private MovieEntity movieEntity;
 
-    public CommentEntity() {
+	public CommentEntity() {
 
-    }
+	}
 
-    public CommentEntity(Long id, String description, Date creation, UserEntity userEntity, MovieEntity movieEntity) {
-        this.id = id;
-        this.description = description;
-        this.creation = creation;
-        this.userEntity = userEntity;
-        this.movieEntity = movieEntity;
-    }
-    
-    public CommentEntity(Long id, String description, Date creation, UserEntity userEntity) {
-        this.id = id;
-        this.description = description;
-        this.creation = creation;
-        this.userEntity = userEntity;
-    }
+	public CommentEntity(Long id, String description, Date creation, UserEntity userEntity, MovieEntity movieEntity) {
+		this.id = id;
+		this.description = description;
+		this.creation = creation;
+		this.userEntity = userEntity;
+		this.movieEntity = movieEntity;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public CommentEntity(Long id, String description, Date creation, UserEntity userEntity) {
+		this.id = id;
+		this.description = description;
+		this.creation = creation;
+		this.userEntity = userEntity;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public Date getCreation() {
-        return creation;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setCreation(Date creation) {
-        this.creation = creation;
-    }
+	public Date getCreation() {
+		return creation;
+	}
 
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
+	public void setCreation(Date creation) {
+		this.creation = creation;
+	}
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
 
-    public MovieEntity getMovieEntity() {
-        return movieEntity;
-    }
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
 
-    public void setMovieEntity(MovieEntity movieEntity) {
-        this.movieEntity = movieEntity;
-    }
+	public MovieEntity getMovieEntity() {
+		if (movieEntity != null) {
+			return new MovieEntity(movieEntity.getId(), movieEntity.getName(), movieEntity.getScore(),
+					movieEntity.getScoreCounter());
+		} else
+			return null;
+	}
+
+	public void setMovieEntity(MovieEntity movieEntity) {
+		this.movieEntity = movieEntity;
+	}
 }

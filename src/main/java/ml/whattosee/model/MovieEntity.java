@@ -65,6 +65,13 @@ public class MovieEntity implements Serializable {
 		this.commentEntityList = commentEntityList;
 	}
 	
+	public MovieEntity(Long id, String name, Long score, Long scoreCounter) {
+		this.id = id;
+		this.name = name;
+		this.score = score;
+		this.scoreCounter = scoreCounter;
+	}
+	
 	public MovieEntity(Long id, String name, Long score, Long scoreCounter, List<PersonEntity> actorList,
 			List<PersonEntity> productorList, ClassificationEntity classificationEntity,
 			List<CommentEntity> commentEntityList) {
@@ -152,7 +159,7 @@ public class MovieEntity implements Serializable {
 			List<CommentEntity> result = new ArrayList<>();
 			for (CommentEntity commentEntity : commentEntityList) {
 				result.add(new CommentEntity(commentEntity.getId(), commentEntity.getDescription(),
-						commentEntity.getCreation(), commentEntity.getUserEntity()));
+						commentEntity.getCreation(), commentEntity.getUserEntity(), commentEntity.getMovieEntity()));
 			}
 			return result;
 		} else
